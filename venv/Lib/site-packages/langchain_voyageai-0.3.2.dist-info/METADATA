@@ -1,0 +1,72 @@
+Metadata-Version: 2.1
+Name: langchain-voyageai
+Version: 0.3.2
+Summary: An integration package connecting VoyageAI and LangChain
+License: MIT
+Project-URL: Source Code, https://github.com/langchain-ai/langchain/tree/master/libs/partners/voyageai
+Project-URL: Release Notes, https://github.com/langchain-ai/langchain/releases?q=tag%3A%22langchain-voyageai%3D%3D0%22&expanded=true
+Project-URL: repository, https://github.com/langchain-ai/langchain
+Requires-Python: <=3.13,>=3.10
+Requires-Dist: langchain-core>=1.0.0
+Requires-Dist: voyageai<1,>=0.3.7
+Requires-Dist: pydantic<3,>=2
+Description-Content-Type: text/markdown
+
+# langchain-voyageai
+
+This package contains the LangChain integrations for VoyageAI through their `voyageai` client package.
+
+## Installation and Setup
+
+- Install the LangChain partner package
+```bash
+pip install langchain-voyageai
+```
+- Get an VoyageAI api key and set it as an environment variable (`VOYAGE_API_KEY`) or use the API key as a parameter in the Client.
+
+
+
+## Text Embedding Model
+
+See a [usage example](https://python.langchain.com/docs/integrations/text_embedding/voyageai)
+
+```python
+from langchain_voyageai import VoyageAIEmbeddings
+```
+
+### Voyage-4 Family Models
+
+The latest generation of VoyageAI embedding models with improved quality and flexibility:
+
+```python
+# voyage-4: Balanced model for general-purpose and multilingual retrieval
+embeddings = VoyageAIEmbeddings(model="voyage-4")
+
+# voyage-4-lite: Optimized for latency and cost, highest batch throughput (1M tokens/batch)
+embeddings = VoyageAIEmbeddings(model="voyage-4-lite")
+
+# voyage-4-large: Best retrieval quality for demanding applications
+embeddings = VoyageAIEmbeddings(model="voyage-4-large")
+```
+
+All voyage-4 family models support flexible output dimensions (256, 512, 1024, 2048):
+
+```python
+embeddings = VoyageAIEmbeddings(
+    model="voyage-4",
+    output_dimension=512  # Choose from: 256, 512, 1024, 2048
+)
+```
+
+### Custom API Endpoint
+
+You can specify a custom API endpoint using the `base_url` parameter:
+
+```python
+embeddings = VoyageAIEmbeddings(
+    model="voyage-3.5",
+    base_url="https://ai.mongodb.com/v1"
+)
+```
+
+This is useful for MongoDB Atlas users or custom deployments.
